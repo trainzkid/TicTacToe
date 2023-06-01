@@ -10,8 +10,11 @@ namespace TicTacToe {
 			Game();
 			Game(long unsigned int boardSize);
 			friend std::ostream& operator<<(std::ostream& os,const Game& game);
+			void run();
 		private:
 			std::vector<std::vector<char>> board;
+			std::vector<char> players;
+			bool isRunning;
 	};
 }
 

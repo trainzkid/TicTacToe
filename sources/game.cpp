@@ -8,7 +8,7 @@ namespace TicTacToe {
 			row.fill('_');
 	};
 
-	std::ostream& operator<<(std::ostream& os,const TicTacToe::Game& game) {
+	std::ostream& operator<<(std::ostream& os,const Game& game) {
 		for(const std::array<char,3>& row : game.board) {
 			for(const char& cell : row) {
 				os<<cell<<' ';

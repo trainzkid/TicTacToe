@@ -1,15 +1,13 @@
 #include <game.h>
 #include <ostream>
-#include <array>
+#include <vector>
 
 namespace TicTacToe {
-	Game::Game() : board{{{},{},{}}} {		// no clue why 2 sets of {} are required, but it errors out about too many init lists otherwise /shrug
-		for(std::array<char,3>& row : board)
-			row.fill('_');
-	};
+	Game::Game(long unsigned int boardSize) : board{boardSize,std::vector<char>(boardSize,'_')} {}
+	Game::Game() : Game(3) {};
 
 	std::ostream& operator<<(std::ostream& os,const Game& game) {
-		for(const std::array<char,3>& row : game.board) {
+		for(const std::vector<char>& row : game.board) {
 			for(const char& cell : row) {
 				os<<cell<<' ';
 			}

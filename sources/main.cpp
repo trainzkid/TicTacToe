@@ -8,6 +8,7 @@ int main(int argc,char* argv[]) {
 
 	TicTacToe::Game game{};
 	std::cout<<game<<std::endl;
+	game.run();
 
 	return 0;
 }

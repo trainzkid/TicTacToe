@@ -2,9 +2,17 @@
 #include <ostream>
 #include <vector>
 #include <iostream>
+#include <utility>
 
 namespace TicTacToe {
-	Game::Game(long unsigned int boardSize) : board{boardSize,std::vector<char>(boardSize,'_')},players{'x','o'},isRunning{true} {}
+	Game::Game(long unsigned int boardSize) : board{boardSize,std::vector<char>(boardSize,'_')},players{'x','o'},isRunning{true} {
+		// "Pick your mark: "
+		// x
+		// o
+		// b
+		// d
+		// custom
+	}
 	Game::Game() : Game(3) {};
 
 	std::ostream& operator<<(std::ostream& os,const Game& game) {
@@ -23,10 +31,23 @@ namespace TicTacToe {
 
 	void Game::run() {
 		// ask players one at a time where they'd like to place their mark
-		
+		for(const char player : players) {
+			std::pair<int,int> coordinate{};
+			std::cout<<"X: ";
+			std::cin>>coordinate.first;
+			std::cout<<"Y: ";
+			std::cin>>coordinate.second;
+
+			coordinate.first--;
+			coordinate.second--;
 		// check if requested place is valid (doesn't contain another player's mark)
+			if(board[coordinate.second][coordinate.first]=='_')
+				board[coordinate.second][coordinate.first]=player;
 
 		// check if last mark placed results in a win for that player
-		 
+
+		// display board
+			std::cout<<*this<<std::endl;
+		}
 	}
 }

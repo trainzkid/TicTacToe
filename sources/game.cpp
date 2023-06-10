@@ -16,9 +16,6 @@ namespace TicTacToe {
 	Game::Game() : Game(3) {};
 
 	std::ostream& operator<<(std::ostream& os,const Game& game) {
-		os<<"Player marks: ";
-		for(const char& player : game.players)
-			os<<player<<' ';
 		os<<std::endl<<"Board: "<<std::endl;
 		for(const std::vector<char>& row : game.board) {
 			for(const char& cell : row) {
@@ -33,11 +30,12 @@ namespace TicTacToe {
 		// ask players one at a time where they'd like to place their mark
 		for(const char player : players) {
 			std::pair<int,int> coordinate{};
-			std::cout<<"X: ";
+			std::cout<<"Column: ";
 			std::cin>>coordinate.first;
-			std::cout<<"Y: ";
+			std::cout<<"Row: ";
 			std::cin>>coordinate.second;
 
+			// correct for 0-based index
 			coordinate.first--;
 			coordinate.second--;
 		// check if requested place is valid (doesn't contain another player's mark)

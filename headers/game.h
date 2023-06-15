@@ -13,6 +13,7 @@ namespace TicTacToe {
 			void run();
 		private:
 			std::vector<std::vector<char>> board;
+			bool check4Win();
 			std::vector<char> players;
 			bool isRunning;
 	};

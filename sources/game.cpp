@@ -27,25 +27,47 @@ namespace TicTacToe {
 	};
 
 	void Game::run() {
-		// ask players one at a time where they'd like to place their mark
-		for(const char player : players) {
-			std::pair<int,int> coordinate{};
-			std::cout<<"Column: ";
-			std::cin>>coordinate.first;
-			std::cout<<"Row: ";
-			std::cin>>coordinate.second;
+		while(isRunning) {
+			// ask players one at a time where they'd like to place their mark
+			for(const char player : players) {
+				std::pair<int,int> coordinate{};
+				 do {
+					std::cout<<"Column: ";
+					std::cin>>coordinate.first;
+					std::cout<<"Row: ";
+					std::cin>>coordinate.second;
 
-			// correct for 0-based index
-			coordinate.first--;
-			coordinate.second--;
-		// check if requested place is valid (doesn't contain another player's mark)
-			if(board[coordinate.second][coordinate.first]=='_')
+					// correct for 0-based index
+					coordinate.first--;
+					coordinate.second--;
+				} while(board[coordinate.second][coordinate.first]!='_');	// check if requested place is valid (doesn't contain another player's mark)
+
 				board[coordinate.second][coordinate.first]=player;
 
-		// check if last mark placed results in a win for that player
+				// display board
+				std::cout<<*this<<std::endl;
 
-		// display board
-			std::cout<<*this<<std::endl;
+				// check if last mark placed results in a win for that player
+				if(check4Win()) {
+					std::cout<<"Win!"<<std::endl;
+					isRunning = false;
+				}
+			}
 		}
+	}
+
+	bool Game::check4Win() {
+		for(const char player : players) {
+			// top -> bottom along center line
+			int matches{};
+			for(std::vector<char> row : board) {
+				int center = (board.size() / 2);
+				if(row[center] == player)
+					matches++;
+			}
+			if(matches == board.size())
+				return true;
+		}
+		return false;
 	}
 }
